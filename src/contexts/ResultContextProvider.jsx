@@ -53,13 +53,14 @@ export const ResultContextProvider = ({ children }) => {
     setIsLoading(true);
 
     const baseURL = apiURLs[type];
+    const apiHost = baseURL.replace(/^https?:\/\//, "").replace(/\/.*$/, "");
 
     const response = await fetch(`${baseURL}?query=${searchTerm}&limit=20`, {
       method: "GET",
       headers: {
         "x-rapidapi-key": "627962f4b2msha70ad00fe1f80dfp172056jsne0724be3692b",
         // "x-rapidapi-host": baseURL.replace(/^https:\/\/|\/.*$/g, ""),
-        "x-rapidapi-host": "real-time-news-data.p.rapidapi.com",
+        "x-rapidapi-host": `${apiHost}`,
       },
     });
     const data = await response.json();
