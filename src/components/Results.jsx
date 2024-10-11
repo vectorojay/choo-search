@@ -74,27 +74,30 @@ export const Results = () => {
     case "/image":
       return (
         <div className="flex flex-wrap justify-center items-center">
-          {/* {results?.knowledge_panel?.info?.map(({ title, label }, i) => (
-            <a
-              className="sm:p-3 p-5 card m-4"
-              // href={page_url}
-              key={i}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img
-                className="object-cover w-48 h-32"
-                // src={url}
-                alt={title}
-                loading="lazy"
-              />
-              <p className="w-36 break-words text-sm mt-2 dark:text-gray-900 hover:underline">
-                {title} `(${label})`
-              </p>
-            </a>
-          ))} */}
+          {results?.data?.map(
+            ({ title, source, thumbnail_url, source_url }, i) => (
+              <a
+                className="sm:p-3 p-5 card m-4 h-64 w-72 hover:scale-105 duration-300"
+                href={source_url}
+                key={i}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  className="object-cover w-48 h-32 w-full"
+                  src={thumbnail_url}
+                  alt={title}
+                  loading="lazy"
+                />
+                <p>{source}</p>
+                <p className="w-full break-words text-sm mt-2 dark:text-gray-900 hover:underline">
+                  {title}
+                </p>
+              </a>
+            )
+          )}
 
-          {results?.knowledge_panel && (
+          {/* {results?.knowledge_panel && (
             <a
               className="sm:p-3 p-5 card m-4"
               href={results.knowledge_panel.description.url}
@@ -114,15 +117,66 @@ export const Results = () => {
                 {results.knowledge_panel.description.text}
               </p>
             </a>
-          )}
+          )} */}
         </div>
       );
 
     case "/videos":
-      return "Videos";
+      return (
+        <div>
+          {results?.videos?.map(
+            ({ title, video_id, channel_id, thumbnails: { url } }, i) => (
+              <a
+                key={i}
+                href={`https://\${www.youtube.com/watch?v=${video_id}&list=${channel_id}}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div>
+                  <img src={url} alt={title} />
+                  <p>{title}</p>
+                </div>
+              </a>
+            )
+          )}
+        </div>
+      );
 
     case "/news":
-      return "News";
+      return (
+        <div className="px-56">
+          {results?.data?.map(({ title, link, snippet, photo_url }, i) => (
+            <a
+              className="card p-5 m-5 flex h-64 items-center justify-center"
+              key={i}
+              href={link}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <div className="flex gap-4">
+                <img
+                  className="h-32 w-32 object-cover rounded-lg"
+                  src={photo_url}
+                  alt={title}
+                  loading="lazy"
+                />
+                <div className="flex flex-col">
+                  <p className="mb-4 font-bold w-96 dark:text-gray-900">
+                    {title}
+                  </p>
+                  <p className="break-words text-sm w-96 text-p1">{snippet}</p>
+                  <a
+                    href={link}
+                    className="text-sm text-right text-p1 hover:underline self-end"
+                  >
+                    Continue reading...
+                  </a>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      );
 
     default:
       <div>error</div>;

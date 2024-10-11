@@ -6,7 +6,7 @@ const apiURLs = {
   web: "https://web-search24.p.rapidapi.com",
   news: "https://real-time-news-data.p.rapidapi.com/search",
   image: "https://real-time-image-search.p.rapidapi.com/search",
-  videos: "https://joj-web-search.p.rapidapi.com",
+  videos: "https://youtube-v2.p.rapidapi.com/search/",
 };
 
 // const apiURL = apiURLs.web;
