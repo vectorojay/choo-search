@@ -77,20 +77,20 @@ export const Results = () => {
           {results?.data?.map(
             ({ title, source, thumbnail_url, source_url }, i) => (
               <a
-                className="sm:p-3 p-5 card m-4 h-64 w-72 hover:scale-105 duration-300"
+                className="m-4 h-64 w-72 hover:scale-105 duration-300"
                 href={source_url}
                 key={i}
                 target="_blank"
                 rel="noreferrer"
               >
                 <img
-                  className="object-cover w-48 h-32 w-full"
+                  className="object-cover h-48 w-full rounded-xl"
                   src={thumbnail_url}
                   alt={title}
                   loading="lazy"
                 />
                 <p>{source}</p>
-                <p className="w-full break-words text-sm mt-2 dark:text-gray-900 hover:underline">
+                <p className="w-full break-words text-sm mt-2 text-p1 hover:underline">
                   {title}
                 </p>
               </a>
@@ -123,20 +123,71 @@ export const Results = () => {
 
     case "/videos":
       return (
-        <div>
+        <div className="flex flex-wrap justify-center items-center">
           {results?.videos?.map(
-            ({ title, video_id, channel_id, thumbnails: { url } }, i) => (
-              <a
+            (
+              {
+                title,
+                author,
+                video_id,
+                channel_id,
+                thumbnails,
+                number_of_views,
+                published_time,
+              },
+              i
+            ) => (
+              // <a
+              //   className="sm:p-3 p-5 card m-4 h-82 w-96 hover:scale-105 duration-300"
+              //   key={i}
+              //   href={`https://www.youtube.com/watch?v=${video_id}&list=${channel_id}`}
+              //   target="_blank"
+              //   rel="noreferrer"
+              // >
+              //   <div>
+              //     <img
+              //       className="object-cover h-48 w-full rounded"
+              //       src={thumbnails[0]?.url}
+              //       alt={title}
+              //     />
+              //     <p className="font-bold text-sm mb-5 dark:text-gray-900">
+              //       {title.length > 30 ? title.substring(0, 45) : title}
+              //     </p>
+              //     <div className="flex">
+              //       <span className="text-xs mr-2 text-p1">
+              //         {number_of_views} views
+              //       </span>{" "}
+              //       <span className="text-xs text-p1">{published_time}</span>
+              //     </div>
+              //     <p className="text-xs text-p1">Youtube | {author}</p>
+              //   </div>
+              // </a>
+              <ReactPlayer
+                className="sm:p-3 p-5 card m-4 h-82 w-96 hover:scale-105 duration-300"
                 key={i}
-                href={`https://\${www.youtube.com/watch?v=${video_id}&list=${channel_id}}`}
+                url={`https://www.youtube.com/watch?v=${video_id}&list=${channel_id}`}
+                controls
                 target="_blank"
                 rel="noreferrer"
               >
                 <div>
-                  <img src={url} alt={title} />
-                  <p>{title}</p>
+                  <img
+                    className="object-cover h-48 w-full rounded"
+                    src={thumbnails[0]?.url}
+                    alt={title}
+                  />
+                  <p className="font-bold text-sm mb-5 dark:text-gray-900">
+                    {title.length > 30 ? title.substring(0, 45) : title}
+                  </p>
+                  <div className="flex">
+                    <span className="text-xs mr-2 text-p1">
+                      {number_of_views} views
+                    </span>{" "}
+                    <span className="text-xs text-p1">{published_time}</span>
+                  </div>
+                  <p className="text-xs text-p1">Youtube | {author}</p>
                 </div>
-              </a>
+              </ReactPlayer>
             )
           )}
         </div>
