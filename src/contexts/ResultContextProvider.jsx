@@ -9,41 +9,6 @@ const apiURLs = {
   videos: "https://youtube-v2.p.rapidapi.com/search/",
 };
 
-// const apiURL = apiURLs.web;
-
-// console.log(apiURL);
-
-// export const ResultContextProvider = ({ children }) => {
-//   const [results, setResults] = useState([]);
-//   const [isLoading, setIsLoading] = useState(false);
-//   const [searchTerm, setSearchTerm] = useState("Google");
-//   // const [error, setError] = useState();
-
-//   const fetchResults = async (type) => {
-//     setIsLoading(true);
-
-//     const response = await fetch(`${baseURL}${type}`, {
-//       method: "GET",
-//       headers: {
-//         "x-rapidapi-key": "627962f4b2msha70ad00fe1f80dfp172056jsne0724be3692b",
-//         "x-rapidapi-host": "joj-web-search.p.rapidapi.com",
-//       },
-//     });
-//     const data = await response.json();
-//     console.log(data);
-
-//     setResults(data);
-//     setIsLoading(false);
-//   };
-//   return (
-//     <ResultContext.Provider
-//       value={{ results, isLoading, searchTerm, setSearchTerm, fetchResults }}
-//     >
-//       {children}
-//     </ResultContext.Provider>
-//   );
-// };
-
 export const ResultContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState([]);

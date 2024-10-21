@@ -2,27 +2,12 @@ import React, { useContext, useEffect, useLayoutEffect } from "react";
 import { useResultContext } from "../contexts/ResultContextProvider";
 import { useLocation } from "react-router-dom";
 import ReactPlayer from "react-player";
+import { FaPlayCircle } from "react-icons/fa";
 import { Loading } from "./Loading";
 
 export const Results = () => {
   const { results, isLoading, fetchResults, searchTerm } = useResultContext();
   const location = useLocation();
-
-  // useEffect(() => {
-  //   if (searchTerm) {
-  //     if (location.pathname === "/web") {
-  //       fetchResults(`${location.pathname}?q=${searchTerm}&num=20`);
-  //     } else if (location.pathname === "/image") {
-  //       fetchResults(`${location.pathname}?q=${searchTerm}&num=20`);
-  //     }
-  //   }
-  // }, [searchTerm, location.pathname]);
-
-  // useEffect(() => {
-  //   if (searchTerm) {
-  //     fetchResults(?q=${searchTerm}&num=20);
-  //   }
-  // }, [searchTerm, location.pathname]);
 
   // useEffect(() => {
   //   if (searchTerm) {
@@ -96,34 +81,12 @@ export const Results = () => {
               </a>
             )
           )}
-
-          {/* {results?.knowledge_panel && (
-            <a
-              className="sm:p-3 p-5 card m-4"
-              href={results.knowledge_panel.description.url}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img
-                className="object-cover w-48 h-32"
-                src={results.knowledge_panel.image.url}
-                alt={results.knowledge_panel.name}
-                loading="lazy"
-              />
-              <p className="w-36 break-words text-sm mt-2 dark:text-gray-900 hover:underline">
-                {results.knowledge_panel.name}
-              </p>
-              <p className="w-36 break-words text-sm mt-2 dark:text-gray-900 hover:underline">
-                {results.knowledge_panel.description.text}
-              </p>
-            </a>
-          )} */}
         </div>
       );
 
     case "/videos":
       return (
-        <div className="flex flex-wrap justify-center items-center">
+        <div className="grid grid-cols-4 gap-2 justify-center items-center">
           {results?.videos?.map(
             (
               {
@@ -137,47 +100,31 @@ export const Results = () => {
               },
               i
             ) => (
-              // <a
-              //   className="sm:p-3 p-5 card m-4 h-82 w-96 hover:scale-105 duration-300"
-              //   key={i}
-              //   href={`https://www.youtube.com/watch?v=${video_id}&list=${channel_id}`}
-              //   target="_blank"
-              //   rel="noreferrer"
-              // >
-              //   <div>
-              //     <img
-              //       className="object-cover h-48 w-full rounded"
-              //       src={thumbnails[0]?.url}
-              //       alt={title}
-              //     />
-              //     <p className="font-bold text-sm mb-5 dark:text-gray-900">
-              //       {title.length > 30 ? title.substring(0, 45) : title}
-              //     </p>
-              //     <div className="flex">
-              //       <span className="text-xs mr-2 text-p1">
-              //         {number_of_views} views
-              //       </span>{" "}
-              //       <span className="text-xs text-p1">{published_time}</span>
-              //     </div>
-              //     <p className="text-xs text-p1">Youtube | {author}</p>
-              //   </div>
-              // </a>
-              <ReactPlayer
-                className="sm:p-3 p-5 card m-4 h-82 w-96 hover:scale-105 duration-300"
+              <a
+                className="sm:p-3 p-5 card h-82 w-82 m-4 hover:scale-105 duration-300 dark:bg-slate-800"
                 key={i}
-                url={`https://www.youtube.com/watch?v=${video_id}&list=${channel_id}`}
-                controls
+                href={`https://www.youtube.com/watch?v=${video_id}&list=${channel_id}`}
                 target="_blank"
                 rel="noreferrer"
               >
-                <div>
+                <div className="relative">
                   <img
-                    className="object-cover h-48 w-full rounded"
+                    className="object-cover h-32 w-full rounded"
                     src={thumbnails[0]?.url}
                     alt={title}
                   />
-                  <p className="font-bold text-sm mb-5 dark:text-gray-900">
-                    {title.length > 30 ? title.substring(0, 45) : title}
+                  {/* Play Button Overlay */}
+                  <FaPlayCircle
+                    className="absolute inset-0 m-auto text-white text-6xl opacity-80"
+                    style={{
+                      // top: "50%",
+                      left: "20%",
+                      transform: "translate(-50%, -50%)",
+                      cursor: "pointer",
+                    }}
+                  />
+                  <p className="font-bold text-sm mb-5 dark:text-gray-100 py-3">
+                    {title.length > 30 ? title.substring(0, 40) : title}
                   </p>
                   <div className="flex">
                     <span className="text-xs mr-2 text-p1">
@@ -187,7 +134,18 @@ export const Results = () => {
                   </div>
                   <p className="text-xs text-p1">Youtube | {author}</p>
                 </div>
-              </ReactPlayer>
+              </a>
+
+              // <ReactPlayer
+              //   className="sm:p-3 p-5 card m-4 h-82 w-96 hover:scale-105 duration-300"
+              //   width="355px"
+              //   height="200px"
+              //   key={i}
+              //   url={`https://www.youtube.com/watch?v=${video_id}&list=${channel_id}`}
+              //   controls
+              //   target="_blank"
+              //   rel="noreferrer"
+              // />
             )
           )}
         </div>
@@ -198,7 +156,7 @@ export const Results = () => {
         <div className="px-56">
           {results?.data?.map(({ title, link, snippet, photo_url }, i) => (
             <a
-              className="card p-5 m-5 flex h-64 items-center justify-center"
+              className="card p-5 m-5 flex h-64 items-center justify-center dark:bg-slate-800"
               key={i}
               href={link}
               target="_blank"
@@ -212,12 +170,13 @@ export const Results = () => {
                   loading="lazy"
                 />
                 <div className="flex flex-col">
-                  <p className="mb-4 font-bold w-96 dark:text-gray-900">
+                  <p className="mb-4 font-bold w-96 dark:text-gray-100">
                     {title}
                   </p>
                   <p className="break-words text-sm w-96 text-p1">{snippet}</p>
                   <a
                     href={link}
+                    target="_blank"
                     className="text-sm text-right text-p1 hover:underline self-end"
                   >
                     Continue reading...
