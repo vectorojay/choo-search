@@ -23,7 +23,7 @@ export const ResultContextProvider = ({ children }) => {
     const response = await fetch(`${baseURL}?query=${searchTerm}&limit=20`, {
       method: "GET",
       headers: {
-        "x-rapidapi-key": "627962f4b2msha70ad00fe1f80dfp172056jsne0724be3692b",
+        "x-rapidapi-key": "894b27832emsh20496688d5036b1p159465jsn2b9aa9d592ce",
         // "x-rapidapi-host": baseURL.replace(/^https:\/\/|\/.*$/g, ""),
         "x-rapidapi-host": `${apiHost}`,
       },

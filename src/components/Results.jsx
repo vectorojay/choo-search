@@ -9,26 +9,26 @@ export const Results = () => {
   const { results, isLoading, fetchResults, searchTerm } = useResultContext();
   const location = useLocation();
 
-  // useEffect(() => {
-  //   if (searchTerm) {
-  //     switch (location.pathname) {
-  //       case "/web":
-  //         fetchResults("web"); // Calls API1 for web search
-  //         break;
-  //       case "/image":
-  //         fetchResults("image"); // Calls API2 for image search
-  //         break;
-  //       case "/news":
-  //         fetchResults("news"); // Calls API3 for news search
-  //         break;
-  //       case "/videos":
-  //         fetchResults("videos"); // Calls API4 for video search
-  //         break;
-  //       default:
-  //         break;
-  //     }
-  //   }
-  // }, [searchTerm, location.pathname]);
+  useEffect(() => {
+    if (searchTerm) {
+      switch (location.pathname) {
+        case "/web":
+          fetchResults("web"); // Calls API1 for web search
+          break;
+        case "/image":
+          fetchResults("image"); // Calls API2 for image search
+          break;
+        case "/news":
+          fetchResults("news"); // Calls API3 for news search
+          break;
+        case "/videos":
+          fetchResults("videos"); // Calls API4 for video search
+          break;
+        default:
+          break;
+      }
+    }
+  }, [searchTerm, location.pathname]);
 
   if (isLoading) return <Loading />;
 
@@ -39,7 +39,7 @@ export const Results = () => {
   switch (location.pathname) {
     case "/web":
       return (
-        <div className="flex flex-wrap justify-between space-y-6 sm:px-56">
+        <div className="flex flex-wrap justify-between space-y-6 sm:px-32 py-5">
           {results?.results?.map(({ url, title, description }, i) => (
             <div key={i} className="md:w-2/5 w-full">
               <a href={url} target="_blank" rel="noreferrer">
